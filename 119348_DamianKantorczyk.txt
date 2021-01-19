@@ -1,0 +1,584 @@
+// 18:35 19.01.2021
+
+// Indeks: 119348
+// Damian Kantorczyk
+
+// ******************************************************************************************************
+
+// ZADANIE 2:
+
+public static bool mojContain(string search, string find)
+{
+	var maxIndex = search.Length - find.Length;
+	if (maxIndex < 0) return false;
+	for (int i = 0; i <= maxIndex; i++)
+	{
+		int j;
+		for (j = 0; j < find.Length; j++)
+			if (ssearch[i + j] != find[j]) break;
+		if (j == find.Length) return true;
+	}
+return false;
+}
+
+public static int mojIndex(StringBuilder sb, string str, int startIndex)
+{            
+int index;
+int length = str.Length;
+int maxSearchLength = (sb.Length - length) + 1;
+bool ignoreCase = true;
+if (ignoreCase)
+{
+	for (int i = startIndex; i < maxSearchLength; ++i)
+	{
+		if (Char.ToLower(sb[i]) == Char.ToLower(str[0]))
+		{
+			index = 1;
+			while ((index < length) && (Char.ToLower(sb[i + index]) == Char.ToLower(str[index])))
+				++index;
+			if (index == length)
+				return i;
+		}
+	}
+	return -1;
+}
+for (int i = startIndex; i < maxSearchLength; ++i)
+{
+	if (sb[i] == str[0])
+	{
+		index = 1;
+		while ((index < length) && (sb[i + index] == str[index]))
+			++index;
+
+		if (index == length)
+			return i;
+	}
+}
+return -1;
+}
+
+static string StrReplace(string s, string s1, string s2)
+{
+	int pozycja=0;
+	StringBuilder sb = new StringBuilder(s);
+	if(mojContain(s, s1))
+	{
+		pozycja = mojIndex(sb, s1, 0);
+		sb.Remove(pozycja, s1.Length);
+		sb.Insert(pozycja, s2);
+	}
+	string zamiana = sb.ToString();
+	return zamiana;
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 4:
+
+static void Reverse(int[] t)
+{
+	int poczatek = 0;
+	int koniec = t.Length - 1;
+	do {
+		int temp = t[poczatek];
+		t[poczatek] = t[koniec];
+		t[koniec] = temp;
+	} while(++poczatek < --koniec);
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 5:
+
+static string Sklej(string[] t, char c)
+{
+	StringBuilder t1 = new StringBuilder();
+	for (int i=0; i<t.Length; i++){
+		if(i<t.Length-1)
+			t1.Append(t[i]).Append(c);
+		else
+			t1.Append(t[i]);
+	}
+	return t1.ToString();
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 6:
+
+static string WyczyscTekst(string s1, string s2)
+{
+	StringBuilder sb1 = new StringBuilder(s1);
+	for(int i=0; i<s2.Length;i++){
+		int k=0;
+		while(k<sb1.Length)
+		{
+			if(sb1[k]==s2[i]){
+				sb1.Remove(k, 1);
+			}
+			else
+			k++;
+		}
+	}
+	return sb1.ToString();
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 9:
+
+struct Punkt
+{
+	public double x;
+	public double y;
+}
+
+static double SumaOdleglosci(Punkt[] t)
+{
+	double suma=0;
+	for(int i=0; i<t.Length; i++){
+		suma+=Math.Sqrt(t[i].x * t[i].x + t[i].y * t[i].y);
+	}
+	return suma;
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 10:
+
+struct Punkt
+{
+	public double x;
+	public double y;
+}
+
+static long Newton(int n, int k)
+{
+	long  Wynik = 1;
+	int i;
+	for(i = 1; i <= k; i++){
+		Wynik = Wynik * ( n - i + 1 ) / i;
+	}
+return Wynik;
+}
+
+static double SumaWzajOdleglosci(Punkt[] t){
+	double suma=0;
+	System.Collections.Generic.List<double> odl_x = new System.Collections.Generic.List<double>();
+	System.Collections.Generic.List<double> odl_y = new System.Collections.Generic.List<double>();
+	int i;
+	for(i=0;i<t.Length;i++)
+		for(int k=i; k<t.Length;k++){
+			if(i!=k){
+				odl_x.Add(Math.Abs(t[i].x-t[k].x));
+				odl_y.Add(Math.Abs(t[i].y-t[k].y));
+			}
+		}
+	double[] odl1_x = odl_x.ToArray();
+	double[] odl1_y = odl_y.ToArray();
+	for(int n=0; n<Newton(t.Length, 2);n++){
+		suma+=Math.Sqrt(odl1_x[n]*odl1_x[n]+odl1_y[n]*odl1_y[n]);
+	}
+	Console.WriteLine();
+	return suma;
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 11:
+
+static bool SprawdzTekst(string s1, string s2)
+{
+	int m = s2.Length;
+	int n = s1.Length;
+	for (int i = 0; i<=n-m; i++) {
+		int j;
+		for (j = 0; j < m; j++)
+			if(s1[i+j] != s2[j])
+				break;
+		if (j == m)
+			return true;
+		
+	}
+	return false;
+}
+
+
+// ******************************************************************************************************
+
+// ZADANIE 12:
+
+static int IsSorted(int[] t)
+{
+	int[] tab = new int[t.Length];
+	int wynik=-1, wynik1=0, wynik2=0, wynik3=0, wynik4=0;
+	int n;
+	for( n=0;n<t.Length;n++){
+		tab[n]=t[n];
+	}
+	Array.Sort(tab); // posortowane rosnaco
+	for(int i=0;i<t.Length;i++)
+	{
+		if(tab[i]==t[i]) wynik1+=1;
+		if(tab[i]==t[t.Length-i-1]) wynik2+=1;
+		if(tab[i]==t[t.Length-1]) wynik3+=1;
+		else wynik4+=1;
+	}
+	if(wynik3==t.Length) return 3;
+	if(wynik1==t.Length) return 1;	
+	else if(wynik2==t.Length) return 2;
+	else if(tab!=t) return 0;
+	else return wynik;
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 14:
+
+static void PokazPary(int[] t)
+{
+	int n = t.Length;
+	Array.Sort(t, 0, n); // na wypadek nieposortowanej tablicy
+	for (int i=0; i<t.Length; i++)
+		for (int j=i+1; j<t.Length; j++)
+			Console.Write("{0}, {1}\n", t[i], t[j]);	
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 15:
+
+struct Punkt
+{
+	public double x;
+	public double y;
+}
+
+static double ObwodWielokata(Punkt[] t){
+	double suma=0;
+	double temp;
+	double[] odleglosci = new double[t.Length];
+	System.Collections.Generic.List<double> odl = new System.Collections.Generic.List<double>();
+	for(int i=0;i<t.Length;i++)
+		for(int j=i;j<t.Length;j++){
+			if(j<t.Length-1)
+				odl.Add(Math.Sqrt(Math.Pow(t[j].x-t[j+1].x,2)+Math.Pow(t[j].y-t[j+1].y,2)));
+			else
+				odl.Add(Math.Sqrt(Math.Pow(t[j].x-t[0].x,2)+Math.Pow(t[j].y-t[0].y,2)));
+			if(j==t.Length-1){
+				temp = Double.MaxValue;
+				foreach(double a in odl)
+					if(a<=temp)
+						temp = a;
+				odleglosci[i] = temp;
+			}
+
+		}
+	for(int i=0; i<odleglosci.Length;i++)
+		suma+=odleglosci[i];
+	return suma;
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 16:
+
+static int[] ZnajdzDlugosci(string[] t)
+{
+	string tekst;
+	int liczZnakow;
+	int[] dlugosci = new int[t.Length];
+	for(int i=0; i<t.Length;i++){
+		liczZnakow=0;
+		tekst=t[i];
+		while( !( String.IsNullOrEmpty(tekst) ) ){
+				liczZnakow+=1;
+				tekst=tekst.Remove((tekst.Length)-1);
+		}
+		dlugosci[i]=liczZnakow;
+	}
+	return dlugosci;
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 17:
+
+public static bool mojContain(string stringToSearch, string stringToFind)
+{
+  var maxIndex = stringToSearch.Length - stringToFind.Length;
+  // String, which we want to find is bigger than string, which we want to search
+  if (maxIndex < 0) return false;
+
+  for (int i = 0; i <= maxIndex; i++)
+  {
+    int j;
+    for (j = 0; j < stringToFind.Length; j++)
+      // If we have different letters, stop comparing and go to next iteration of outer loop
+      if (stringToSearch[i + j] != stringToFind[j]) break;
+    // If we reached last iteration of a loop then we found the string
+    if (j == stringToFind.Length) return true;
+  }
+  // If we reached this point, we didn't find the string
+  return false;
+}
+
+static List<int> ZnajdzLinie(string fname, string s)
+{
+	string line;
+	string[] lines1 = System.IO.File.ReadAllLines(fname);
+	List<int> numLines = new List<int>();
+	for(int i=0;i<lines1.Length;i++)
+	{
+		line=lines1[i];
+		if(mojContain(line, s))
+			numLines.Add(i+1);
+	}
+	return numLines;
+}
+
+static int[] ZnajdzDlugosci(string[] t)
+{
+	string tekst;
+	int liczZnakow;
+	int[] dlugosci = new int[t.Length];
+	for(int i=0; i<t.Length;i++){
+		liczZnakow=0;
+		tekst=t[i];
+		while( !( String.IsNullOrEmpty(tekst) ) ){
+				liczZnakow+=1;
+				tekst=tekst.Remove((tekst.Length)-1);
+		}
+		dlugosci[i]=liczZnakow;
+	}
+	return dlugosci;
+}
+
+// ******************************************************************************************************
+
+// ZADANIE 19:
+
+	static string LiczbaSlownie(uint x){
+		string s1 = x.ToString();
+		char[] chars = s1.ToCharArray();
+		Array.Reverse(chars);
+		string s= new string(chars);
+		StringBuilder liczba= new StringBuilder();
+		int dlugosc = s.Length;
+		while(dlugosc>0){
+			switch(dlugosc){
+				case 10:
+					if(s[9]=='1') liczba.Append("jeden ");
+					else if(s[9]=='2') liczba.Append("dwa ");
+					else if(s[9]=='3') liczba.Append("trzy ");
+					else if(s[9]=='4') liczba.Append("cztery ");
+					dlugosc=dlugosc-1;
+					if(s[9]=='1') liczba.Append("miliard ");
+					else if(s[9]=='1'||s[9]=='1'||s[9]=='1') liczba.Append("miliardy ");
+					break;
+				case 9:
+					if(s[8]=='1') liczba.Append("sto ");
+					else if(s[8]=='2') liczba.Append("dwieście ");
+					else if(s[8]=='3') liczba.Append("trzysta ");
+					else if(s[8]=='4') liczba.Append("czterysta ");
+					else if(s[8]=='5') liczba.Append("pięćset ");
+					else if(s[8]=='6') liczba.Append("sześćset ");
+					else if(s[8]=='7') liczba.Append("siedemset ");
+					else if(s[8]=='8') liczba.Append("osiemset ");
+					else if(s[8]=='9') liczba.Append("dziewięćset ");
+					dlugosc=dlugosc-1;
+					if(s[8]!='0' && s[7]=='0' && s[6]=='0') liczba.Append("milionów ");
+					break;
+				case 8:
+					if(s[7]=='1'){
+						if(s[6]=='0') liczba.Append("dziesięć ");
+						else if(s[6]=='1') liczba.Append("jedenaście ");
+						else if(s[6]=='2') liczba.Append("dwanaście ");
+						else if(s[6]=='3') liczba.Append("trzynaście ");
+						else if(s[6]=='4') liczba.Append("czternaście ");
+						else if(s[6]=='5') liczba.Append("piętnaście ");
+						else if(s[6]=='6') liczba.Append("szesnaście ");
+						else if(s[6]=='7') liczba.Append("siedemnaście ");
+						else if(s[6]=='8') liczba.Append("osiemnaście ");
+						else if(s[6]=='9') liczba.Append("dziewiętnaście ");
+					}
+					switch(s[7]){
+						case '2': liczba.Append("dwadzieścia "); break;
+						case '3': liczba.Append("trzydzieści "); break;
+						case '4': liczba.Append("czterdzieści "); break;
+						case '5': liczba.Append("pięćdziesiąt "); break;
+						case '6': liczba.Append("sześćdziesiąt "); break;
+						case '7': liczba.Append("siedemdziesiąt "); break;
+						case '8': liczba.Append("osiemdziesiąt "); break;
+						case '9': liczba.Append("dziewięćdziesiąt "); break;
+					}
+					if(s[7]=='0'||s[7]=='2'||s[7]=='3'||s[7]=='4'||s[7]=='5'||s[7]=='6'||s[7]=='7'||s[7]=='8'||s[7]=='9')
+						switch(s[6]){
+							case '1': liczba.Append("jeden "); break;
+							case '2': liczba.Append("dwa "); break;
+							case '3': liczba.Append("trzy "); break;
+							case '4': liczba.Append("cztery "); break;
+							case '5': liczba.Append("pięć "); break;
+							case '6': liczba.Append("sześć "); break;
+							case '7': liczba.Append("siedem "); break;
+							case '8': liczba.Append("osiem "); break;
+							case '9': liczba.Append("dziewięć "); break;
+							default: break;
+						}
+					if(s[6]=='2'||s[6]=='3'||s[6]=='4') liczba.Append("miliony ");
+					else liczba.Append("milionów ");
+					dlugosc=dlugosc-2;
+					break;
+				case 7:
+					if(s[6]=='1') liczba.Append("jeden ");
+					else if(s[6]=='2') liczba.Append("dwa ");
+					else if(s[6]=='3') liczba.Append("trzy ");
+					else if(s[6]=='4') liczba.Append("cztery ");
+					else if(s[6]=='5') liczba.Append("pięć ");
+					else if(s[6]=='6') liczba.Append("sześć ");
+					else if(s[6]=='7') liczba.Append("siedem ");
+					else if(s[6]=='8') liczba.Append("osiem ");
+					else if(s[6]=='9') liczba.Append("dziewięć ");
+					dlugosc=dlugosc-1;
+					if(s[6]=='1') liczba.Append("milion ");
+					else if(s[6]=='2'||s[6]=='3'||s[6]=='4') liczba.Append("miliony ");
+					else if(s[6]!='0') liczba.Append("milionów ");
+					break;
+				case 6:
+					if(s[5]=='1') liczba.Append("sto ");
+					else if(s[5]=='2') liczba.Append("dwieście ");
+					else if(s[5]=='3') liczba.Append("trzysta ");
+					else if(s[5]=='4') liczba.Append("czterysta ");
+					else if(s[5]=='5') liczba.Append("pięćset ");
+					else if(s[5]=='6') liczba.Append("sześćset ");
+					else if(s[5]=='7') liczba.Append("siedemset ");
+					else if(s[5]=='8') liczba.Append("osiemset ");
+					else if(s[5]=='9') liczba.Append("dziewięćset ");
+					dlugosc=dlugosc-1;
+					if(s[5]!='0' && s[4]=='0' && s[3]=='0') liczba.Append("tysięcy");
+					break;
+				case 5:
+					if(s[4]=='1'){
+						if(s[3]=='0') liczba.Append("dziesięć ");
+						else if(s[3]=='1') liczba.Append("jedenaście ");
+						else if(s[3]=='2') liczba.Append("dwanaście ");
+						else if(s[3]=='3') liczba.Append("trzynaście ");
+						else if(s[3]=='4') liczba.Append("czternaście ");
+						else if(s[3]=='5') liczba.Append("piętnaście ");
+						else if(s[3]=='6') liczba.Append("szesnaście ");
+						else if(s[3]=='7') liczba.Append("siedemnaście ");
+						else if(s[3]=='8') liczba.Append("osiemnaście ");
+						else if(s[3]=='9') liczba.Append("dziewiętnaście ");
+					}
+					switch(s[4]){
+						case '2': liczba.Append("dwadzieścia "); break;
+						case '3': liczba.Append("trzydzieści "); break;
+						case '4': liczba.Append("czterdzieści "); break;
+						case '5': liczba.Append("pięćdziesiąt "); break;
+						case '6': liczba.Append("sześćdziesiąt "); break;
+						case '7': liczba.Append("siedemdziesiąc "); break;
+						case '8': liczba.Append("osiemdziesiąt "); break;
+						case '9': liczba.Append("dziewięćdziesiąt "); break;
+					}
+					if(s[4]=='0'||s[4]=='2'||s[4]=='3'||s[4]=='4'||s[4]=='5'||s[4]=='6'||s[4]=='7'||s[4]=='8'||s[4]=='9')
+						switch(s[3]){
+							case '1': liczba.Append("jeden "); break;
+							case '2': liczba.Append("dwa "); break;
+							case '3': liczba.Append("trzy "); break;
+							case '4': liczba.Append("cztery "); break;
+							case '5': liczba.Append("pięć "); break;
+							case '6': liczba.Append("sześć "); break;
+							case '7': liczba.Append("siedem "); break;
+							case '8': liczba.Append("osiem "); break;
+							case '9': liczba.Append("dziewięć "); break;
+							default: break;
+						}
+					dlugosc=dlugosc-2;
+					if(s[4]=='1') liczba.Append("tysięcy ");
+					else if(s[3]=='2'||s[3]=='3'||s[3]=='4') liczba.Append("tysiące ");
+					else if(s[4]!='0') liczba.Append("tysięcy ");
+					break;
+				case 4:
+					if(s[3]=='1') liczba.Append("jeden ");
+					else if(s[3]=='2') liczba.Append("dwa ");
+					else if(s[3]=='3') liczba.Append("trzy ");
+					else if(s[3]=='4') liczba.Append("cztery ");
+					else if(s[3]=='5') liczba.Append("pięć ");
+					else if(s[3]=='6') liczba.Append("sześć ");
+					else if(s[3]=='7') liczba.Append("siedem ");
+					else if(s[3]=='8') liczba.Append("osiem ");
+					else if(s[3]=='9') liczba.Append("dziewięć ");
+					dlugosc=dlugosc-1;
+					if(s[3]=='1') liczba.Append("tysiąc ");
+					else if (s[3]=='2'||s[3]=='3'||s[3]=='4') liczba.Append("tysiące ");
+					else if (s[3]!='0') liczba.Append("tysięcy ");
+					break;
+				case 3:
+					if(s[2]=='1') liczba.Append("sto ");
+					else if(s[2]=='2') liczba.Append("dwieście ");
+					else if(s[2]=='3') liczba.Append("trzysta ");
+					else if(s[2]=='4') liczba.Append("czterysta ");
+					else if(s[2]=='5') liczba.Append("pięćset ");
+					else if(s[2]=='6') liczba.Append("sześćset ");
+					else if(s[2]=='7') liczba.Append("siedemset ");
+					else if(s[2]=='8') liczba.Append("osiemset ");
+					else if(s[2]=='9') liczba.Append("dziewięćset ");
+					dlugosc=dlugosc-1;
+					break;
+				case 2:
+					if(s[1]=='1'){
+						if(s[0]=='0') liczba.Append("dziesięć ");
+						else if(s[0]=='1') liczba.Append("jedenaście ");
+						else if(s[0]=='2') liczba.Append("dwanaście ");
+						else if(s[0]=='3') liczba.Append("trzynaście ");
+						else if(s[0]=='4') liczba.Append("czternaście ");
+						else if(s[0]=='5') liczba.Append("piętnaście ");
+						else if(s[0]=='6') liczba.Append("szesnaście ");
+						else if(s[0]=='7') liczba.Append("siedemnaście ");
+						else if(s[0]=='8') liczba.Append("osiemnaście ");
+						else if(s[0]=='9') liczba.Append("dziewiętnaście ");
+					}
+					switch(s[1]){
+						case '2': liczba.Append("dwadzieścia "); break;
+						case '3': liczba.Append("trzydzieści "); break;
+						case '4': liczba.Append("czterdzieści "); break;
+						case '5': liczba.Append("pięćdziesiąt "); break;
+						case '6': liczba.Append("sześćdziesiąt "); break;
+						case '7': liczba.Append("siedemdziesiąc "); break;
+						case '8': liczba.Append("osiemdziesiąt "); break;
+						case '9': liczba.Append("dziewięćdziesiąt "); break;
+					}
+					if(s[1]=='0'||s[1]=='2'||s[1]=='3'||s[1]=='4'||s[1]=='5'||s[1]=='6'||s[1]=='7'||s[1]=='8'||s[1]=='9')
+						switch(s[0]){
+							case '1': liczba.Append("jeden "); break;
+							case '2': liczba.Append("dwa "); break;
+							case '3': liczba.Append("trzy "); break;
+							case '4': liczba.Append("cztery "); break;
+							case '5': liczba.Append("pięć "); break;
+							case '6': liczba.Append("sześć "); break;
+							case '7': liczba.Append("siedem "); break;
+							case '8': liczba.Append("osiem "); break;
+							case '9': liczba.Append("dziewięć "); break;
+							default: break;
+						}
+					dlugosc=dlugosc-2;
+					break;
+				case 1:
+				if(s[0]=='1') liczba.Append("jeden");
+				else if(s[0]=='2') liczba.Append("dwa");
+				else if(s[0]=='3') liczba.Append("trzy");
+				else if(s[0]=='4') liczba.Append("cztery");
+				else if(s[0]=='5') liczba.Append("pięć");
+				else if(s[0]=='6') liczba.Append("sześć");
+				else if(s[0]=='7') liczba.Append("siedem");
+				else if(s[0]=='8') liczba.Append("osiem");
+				else if(s[0]=='9') liczba.Append("dziewięć");
+				else if(s[0]=='0') liczba.Append("zero");
+				dlugosc=dlugosc-1;
+				break;
+				default: dlugosc=dlugosc-1; break;
+			}
+		}
+		string liczbaString = liczba.ToString();
+		return liczbaString;
+	}

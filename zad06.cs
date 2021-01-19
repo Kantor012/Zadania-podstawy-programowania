@@ -4,7 +4,7 @@ using System.Text;
 class App
 {
 	
-	static string WyczyscTekst(string s1, string s2)
+static string WyczyscTekst(string s1, string s2)
 {
 	StringBuilder sb1 = new StringBuilder(s1);
 	for(int i=0; i<s2.Length;i++){

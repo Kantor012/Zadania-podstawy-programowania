@@ -4,7 +4,7 @@ using System.Text;
 class App
 {
 	
-	static string Sklej(string[] t, char c)
+static string Sklej(string[] t, char c)
 {
 	StringBuilder t1 = new StringBuilder();
 	for (int i=0; i<t.Length; i++){

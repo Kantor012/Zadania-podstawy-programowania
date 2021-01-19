@@ -4,7 +4,7 @@ using System.Text;
 class App
 {
 	
-	static void Reverse(int[] t)
+static void Reverse(int[] t)
 {
 	int poczatek = 0;
 	int koniec = t.Length - 1;
