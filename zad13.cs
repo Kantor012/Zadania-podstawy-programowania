@@ -25,7 +25,7 @@ static void ZnajdzParzyste(string fname1, string fname2)
 // ********************************************************	
 	static void Main()
 	{
-		ZnajdzParzyste("test1.txt","test2.txt");
+		ZnajdzParzyste("znajdz_parzyste_input.txt","znajdz_parzyste_output.txt");
 	}
 
 }
