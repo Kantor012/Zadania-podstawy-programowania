@@ -184,19 +184,6 @@ class App
 						else if(s[0]=='8') liczba.Append("osiemnaście ");
 						else if(s[0]=='9') liczba.Append("dziewiętnaście ");
 					}
-						/*switch(s[0]){
-							case '0': liczba.Append("dziesięć "); break;
-							case '1': liczba.Append("jedenaście "); break;
-							case '2': liczba.Append("dwanaście "); break;
-							case '3': liczba.Append("trzynaście "); break;
-							case '4': liczba.Append("czternaście "); break;
-							case '5': liczba.Append("piętnaście "); break;
-							case '6': liczba.Append("szesnaście "); break;
-							case '7': liczba.Append("siedemnaście "); break;
-							case '8': liczba.Append("osiemnaście "); break;
-							case '9': liczba.Append("dziewiętnaście "); break;
-							default: break;
-						}*/
 					switch(s[1]){
 						case '2': liczba.Append("dwadzieścia "); break;
 						case '3': liczba.Append("trzydzieści "); break;

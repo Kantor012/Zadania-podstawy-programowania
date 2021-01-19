@@ -4,18 +4,6 @@ using System.Text;
 class App
 {
 
-/*static int[] Reverse(int[] t)
-{
-	int poczatek = 0;
-	int koniec = t.Length - 1;
-	do {
-		int temp = t[poczatek];
-		t[poczatek] = t[koniec];
-		t[koniec] = temp;
-	} while(++poczatek < --koniec);
-	return t;
-}*/
-
 static int IsSorted(int[] t)
 {
 	int[] tab = new int[t.Length];
@@ -36,7 +24,7 @@ static int IsSorted(int[] t)
 	if(wynik1==t.Length) return 1;	
 	else if(wynik2==t.Length) return 2;
 	else if(tab!=t) return 0;
-	else return -1;
+	else return wynik;
 }
 // ********************************************************	
 	static void Main()

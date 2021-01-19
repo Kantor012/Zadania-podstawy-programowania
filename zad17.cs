@@ -5,7 +5,7 @@ using System.Collections.Generic;
 class App
 {
 	
-public static bool Contain(string stringToSearch, string stringToFind)
+public static bool mojContain(string stringToSearch, string stringToFind)
 {
   var maxIndex = stringToSearch.Length - stringToFind.Length;
   // String, which we want to find is bigger than string, which we want to search
@@ -20,7 +20,6 @@ public static bool Contain(string stringToSearch, string stringToFind)
     // If we reached last iteration of a loop then we found the string
     if (j == stringToFind.Length) return true;
   }
-
   // If we reached this point, we didn't find the string
   return false;
 }
@@ -33,11 +32,9 @@ static List<int> ZnajdzLinie(string fname, string s)
 	for(int i=0;i<lines1.Length;i++)
 	{
 		line=lines1[i];
-		if(Contain(line, s))
+		if(mojContain(line, s))
 			numLines.Add(i+1);
 	}
-	
-	
 	return numLines;
 }
 

@@ -3,7 +3,7 @@ using System.Text;
 
 class App
 {
-public static bool Contain(string stringToSearch, string stringToFind)
+public static bool mojContain(string stringToSearch, string stringToFind)
 {
 	var maxIndex = stringToSearch.Length - stringToFind.Length;
 	// String, which we want to find is bigger than string, which we want to search
@@ -61,7 +61,7 @@ static string StrReplace(string s, string s1, string s2)
 {
 	int pozycja=0;
 	StringBuilder sb = new StringBuilder(s);
-	if(Contain(s, s1))
+	if(mojContain(s, s1))
 	{
 		pozycja = mojIndex(sb, s1, 0);
 		sb.Remove(pozycja, s1.Length);

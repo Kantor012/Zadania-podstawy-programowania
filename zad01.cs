@@ -1,17 +1,9 @@
-/*
-*********************************************************
-*********************************************************
-********************* UNFINISHED ************************
-*********************************************************
-*********************************************************
-*/
-
 using System;
 using System.Text;
 
 class App
 {
-public static bool Contain(string s1, string s2)
+public static bool mojContain(string s1, string s2)
 {
 	var maxIndex = s1.Length - s2.Length;
 	if (maxIndex < 0) return false;
